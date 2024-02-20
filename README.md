@@ -1,4 +1,7 @@
 !!!!!!!!!!!!Wenn du das abgibst das Löschen!!!!!!!!!!!!!!!!!!
+Datei "README.md" öffnen und oben in der leiste von Preview auf Code umstellen zum besseren Ansicht :)
+
+
 In dieses Repo findest du das Programm. Wenn du es ausprobieren möchtest kannst du auf "Code" drücken und dir als ZIP runterladen. 
 
 Stand 20.02. 22:30
