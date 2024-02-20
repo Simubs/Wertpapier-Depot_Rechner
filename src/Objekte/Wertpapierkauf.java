@@ -1,6 +1,7 @@
 package Objekte;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Wertpapierkauf {
 
@@ -16,8 +17,40 @@ public class Wertpapierkauf {
 
     private double kaufkosten;
 
+    public Wertpapierkauf(Wertpapier wertpapier) {
+        this.wertpapier = wertpapier;
+    }
+
+    //Generated
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Wertpapierkauf that = (Wertpapierkauf) o;
+        return Objects.equals(wertpapier, that.wertpapier);
+    }
+
+    public Wertpapierkauf(Wertpapier wertpapier, LocalDate kaufdatum, double aktuellerKurs, double kursZumKaufdatum, double stueckzahl, double kaufkosten) {
+        this.wertpapier = wertpapier;
+        this.kaufdatum = kaufdatum;
+        this.aktuellerKurs = aktuellerKurs;
+        this.kursZumKaufdatum = kursZumKaufdatum;
+        this.stueckzahl = stueckzahl;
+        this.kaufkosten = kaufkosten;
+    }
+
     public Wertpapier getWertpapier() {
         return wertpapier;
+    }
+
+    public double berechneRendite(){
+
+        return aktuellerKurs*stueckzahl - kursZumKaufdatum*stueckzahl;
+
+    }
+
+    public double berechneAktuellenWert(){
+        return aktuellerKurs*stueckzahl;
     }
 
     public void setWertpapier(Wertpapier wertpapier) {
