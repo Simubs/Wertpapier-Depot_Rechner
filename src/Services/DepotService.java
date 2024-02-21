@@ -1,5 +1,6 @@
 package Services;
 
+import Exceptions.ISINNichtGefundenException;
 import Exceptions.WertpapierkaufEmptyException;
 import Objekte.Wertpapier;
 import Objekte.Wertpapierkauf;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DepotService {
+
 
     private List<Wertpapierkauf> depot;
 
@@ -110,7 +112,44 @@ public class DepotService {
         return worstPerformer;
     }
 
-    public double berechneRenditeAbsoulut(String ISIN){
+    public double berechneRenditeAbsoulut(String ISIN) throws ISINNichtGefundenException{
+
+        Wertpapierkauf gefundenerKauf = getKauf(ISIN);
+
+        if(gefundenerKauf == null){
+            throw new ISINNichtGefundenException();
+        }
+        return gefundenerKauf.berechneRendite();
+
+    }
+
+    private Wertpapierkauf getKauf(String ISIN) {
+        if(ISIN != null){
+            for(int i = 0; i<depot.size();i++){
+
+                if(depot.get(i).getWertpapier().getISIN().equals(ISIN)){
+                    return depot.get(i);
+                }
+            }
+        }
+        return null;
+    }
+
+    public double berrechneRenditeProzentual(String ISIN) throws ISINNichtGefundenException{
+
+        Wertpapierkauf gefundenerKauf = getKauf(ISIN);
+
+        if(gefundenerKauf == null){
+            throw  new ISINNichtGefundenException();
+        }
+
+        return gefundenerKauf.berechneRendite()*100/gefundenerKauf.getKaufkosten();
+    }
+
+    public int anzahlWertpapiere(){
+        if(depot != null){
+            return depot.size();
+        }
         return 0;
     }
 
