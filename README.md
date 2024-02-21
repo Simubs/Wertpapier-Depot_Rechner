@@ -9,7 +9,8 @@ Die bisherigen Klassen und Packages:
 
 Exceptions                      -Hier findest du die angelegten Exceptions
   ISINFormatException           -Diese Exception wird geworfen, wenn das Format der ISIN nicht richtig ist
-  WertpapierkaufEmptyException  -Wird noch nicht verwendet 
+  WertpapierkaufEmptyException  -Wird geworfen, wenn man ein null Objekt zum depot hinzufügen will
+  ISINNichtGefundenException    -Wird geworfen, wenn man nach der ISIN sucht und kein ergebnis gefunden wird.
 
 Objekte                         -Hier sind deine verschiedenen Objekte drin, die du brauchst
   Wertpapier                    -Dieses Objekt ist für ein Wertpapier besteht aus ISIN und Name
@@ -18,7 +19,10 @@ Objekte                         -Hier sind deine verschiedenen Objekte drin, die
 Services                        -Hier ist die eigentliche Programmierlogik
   DepotService                  -Hier kann man alle aktivitäten, die für das Depot wichtig sind programmiert (Da muss ich noch anpassungen unternehmen)
 
-Main                            -Ist die Main, steht bis jetzt noch nichts drin
+Tools
+  Tools                         -Das ist eine Klasse, die ich von KOP5 geklaut habe.
+
+Main                            -Startet die Konsole.
 
 
 

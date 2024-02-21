@@ -1,5 +1,6 @@
 package Services;
 
+import Exceptions.ISINFormatException;
 import Exceptions.ISINNichtGefundenException;
 import Exceptions.WertpapierkaufEmptyException;
 import Objekte.Wertpapier;
@@ -35,7 +36,11 @@ public class DepotService {
     }
 
     public boolean deleteISIN(String ISIN){
-        return depot.remove(new Wertpapierkauf(new Wertpapier(null,ISIN)));
+        try {
+            return depot.remove(new Wertpapierkauf(new Wertpapier(null,ISIN)));
+        } catch (ISINFormatException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public double berechneGesammtwertDepot(){
@@ -123,6 +128,15 @@ public class DepotService {
 
     }
 
+    public double berrechneWertPosition(String ISIN)throws ISINNichtGefundenException{
+        Wertpapierkauf gefundenerKauf = getKauf(ISIN);
+
+        if(gefundenerKauf == null){
+            throw new ISINNichtGefundenException();
+        }
+        return gefundenerKauf.berechneAktuellenWert();
+    }
+
     private Wertpapierkauf getKauf(String ISIN) {
         if(ISIN != null){
             for(int i = 0; i<depot.size();i++){
@@ -143,7 +157,7 @@ public class DepotService {
             throw  new ISINNichtGefundenException();
         }
 
-        return gefundenerKauf.berechneRendite()*100/gefundenerKauf.getKaufkosten();
+        return gefundenerKauf.berechneRendite()*100/(gefundenerKauf.getKaufkosten()+ gefundenerKauf.getKursZumKaufdatum()*gefundenerKauf.getStueckzahl());
     }
 
     public int anzahlWertpapiere(){
@@ -153,4 +167,17 @@ public class DepotService {
         return 0;
     }
 
+    public List<Wertpapier> alleWertpapierAuflisten(){
+
+        if(depot == null && depot.size() == 0){
+            return null;
+        }
+
+        List<Wertpapier> wertpapiere = new ArrayList<>();
+
+        for(int i = 0; i<depot.size();i++){
+            wertpapiere.add(depot.get(i).getWertpapier());
+        }
+        return wertpapiere;
+    }
 }

@@ -21,6 +21,10 @@ public class Wertpapierkauf {
         this.wertpapier = wertpapier;
     }
 
+    public Wertpapierkauf() {
+
+    }
+
     //Generated
     @Override
     public boolean equals(Object o) {
@@ -45,7 +49,7 @@ public class Wertpapierkauf {
 
     public double berechneRendite(){
 
-        return aktuellerKurs*stueckzahl - kursZumKaufdatum*stueckzahl;
+        return aktuellerKurs*stueckzahl - kursZumKaufdatum*stueckzahl-kaufkosten;
 
     }
 
@@ -55,6 +59,18 @@ public class Wertpapierkauf {
 
     public void setWertpapier(Wertpapier wertpapier) {
         this.wertpapier = wertpapier;
+    }
+
+    @Override
+    public String toString() {
+        return "Die Position: \n" +
+                "\tISIN: " +wertpapier.getISIN()+"\n" +
+                "\tName: " +wertpapier.getName()+"\n" +
+                "\tKaufdatum: " + kaufdatum +"\n" +
+                "\tStückzahl: "+stueckzahl+"\n" +
+                "\tKurs zum Kaufdatum: "+kursZumKaufdatum+"\n" +
+                "\tKaufkosten: "+kaufkosten+"\n" +
+                "\tAktueller Kurs: "+aktuellerKurs;
     }
 
     public LocalDate getKaufdatum() {
