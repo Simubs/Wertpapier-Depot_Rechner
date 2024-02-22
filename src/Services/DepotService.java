@@ -33,18 +33,13 @@ public class DepotService {
         depot.add(wertpapierkauf);
     }
 
-    //Methode zum löschen eines Wertpapierkaufs anhand des Indexes (nicht verwendet)
-    public boolean deleteIndex(int i){
-        return depot.remove(i) != null;
-    }
 
-    //Methode zum löschen eines Wertpapierkaufs anhand der ISIN (nicht verwendet)
-    public boolean deleteISIN(String ISIN){
-        try {
-            return depot.remove(new Wertpapierkauf(new Wertpapier(null,ISIN)));
-        } catch (ISINFormatException e) {
-            throw new RuntimeException(e);
-        }
+
+    //Methode zum löschen eines Wertpapierkaufs anhand der ISIN
+    public boolean deleteISIN(String ISIN) throws ISINFormatException{
+
+            return depot.remove(getKauf(ISIN));
+
     }
 
     // Diese Methode berechnet den Gesamtwert des Depots und gibt diesen zurück

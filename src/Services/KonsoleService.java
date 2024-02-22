@@ -34,6 +34,7 @@ public class KonsoleService {
             System.out.println("\t[6] Den Best-Performer herrausfinden.");
             System.out.println("\t[7] Den Worst-Performer herrausfinden.");
             System.out.println("\t[8] Alle Positionen auflisten.");
+            System.out.println("\t[9] Löschen einer Position aus dem Depot.");
         }
 
         System.out.println("\tZum beenden benutzen Sie irgendeine andere Zahl");
@@ -69,6 +70,9 @@ public class KonsoleService {
                 case 8:
                     findAlleWertpapiere();
                     break;
+                case 9:
+                    loeschenEinerPosition();
+                    break;
                 default: // Der Default wird nur ausgeführt, wenn keine der oberen Cases zutrifft (wird benutzt, um das Programm zu beenden)
                     return;
             }
@@ -81,6 +85,18 @@ public class KonsoleService {
             }
         }
 
+    }
+
+    private void loeschenEinerPosition()  {
+        System.out.println("Welcher Kauf mit welche ISIN soll gelöscht werden?");
+        String ISIN = Tools.stringEingabe();
+
+        try {
+            depotService.deleteISIN(ISIN);
+        } catch (ISINFormatException e) {
+            System.out.println("Es wurde kein passendes Wertpapier zu dieser ISIN gefunden! Versuchen sie es Erneut!");
+        }
+            starteKonsolenAbfrage();
     }
 
     //Gibt alle Wertpapiere aus, die im Depot sind
