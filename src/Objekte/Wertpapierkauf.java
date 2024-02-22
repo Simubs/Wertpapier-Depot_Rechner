@@ -25,7 +25,9 @@ public class Wertpapierkauf {
 
     }
 
-    //Generated
+    //Intelij Generated
+    //wird immer aufgerufen, wenn .equals benutzt wird. Wird auch bei der remove/find Methode von Listen verwendet
+    //War notwendig, da nur nach den Wertpapier verglichen werden soll
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,6 +36,7 @@ public class Wertpapierkauf {
         return Objects.equals(wertpapier, that.wertpapier);
     }
 
+    //Konstruktor mit allen Attributen
     public Wertpapierkauf(Wertpapier wertpapier, LocalDate kaufdatum, double aktuellerKurs, double kursZumKaufdatum, double stueckzahl, double kaufkosten) {
         this.wertpapier = wertpapier;
         this.kaufdatum = kaufdatum;
@@ -47,12 +50,14 @@ public class Wertpapierkauf {
         return wertpapier;
     }
 
+    //berechnet die Rendite des Wertpapierkaufs
     public double berechneRendite(){
 
         return aktuellerKurs*stueckzahl - kursZumKaufdatum*stueckzahl-kaufkosten;
 
     }
 
+    //berechnet den aktuellen Wert des Wertpapierkaufs
     public double berechneAktuellenWert(){
         return aktuellerKurs*stueckzahl;
     }
@@ -61,6 +66,8 @@ public class Wertpapierkauf {
         this.wertpapier = wertpapier;
     }
 
+    //Eine generierte und selbst angepasste toString Methode
+    //Diese wird immer aufgerufen, wenn das Objekt direkt in ein print jeglicher art gepackt wird
     @Override
     public String toString() {
         return "Die Position: \n" +
